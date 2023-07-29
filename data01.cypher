@@ -1,3 +1,10 @@
+CREATE (:Central {name: 'Ordinal theory'});
+
+MATCH (a:Central {name: 'Ordinal theory'}), (b:Project) CREATE (a)-[:CONTAINS]->(b);
+MATCH (a:Central {name: 'Ordinal theory'}), (b:Team) CREATE (a)-[:CONTAINS]->(b);
+MATCH (a:Central {name: 'Ordinal theory'}), (b:Technology) CREATE (a)-[:CONTAINS]->(b);
+
+
 // Entities table:
 
 
