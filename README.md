@@ -9,3 +9,5 @@ For daily updates, follow #notes on Ordinautz discord. For access, DM @kluless_ 
 Literature for what is being built will be updated soon along with a whitepaper and a roadmap (gitbook optional).
 
 A webhook has been added to connect this repo to discord's #notes.
+
+31/07/2023 - Version 0.01
