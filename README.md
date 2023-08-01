@@ -10,4 +10,4 @@ Literature for what is being built will be updated soon along with a whitepaper 
 
 A webhook has been added to connect this repo to discord's #notes.
 
-31/07/2023 - Version 0.01
+31/07/2023 - Version 0.01 ![Version 0.01](/Users/angad/Downloads/version0.01.png "Version 0.01 - KG")
