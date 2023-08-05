@@ -1,0 +1,3 @@
+Entity ID: 12
+Entity Type: Technology
+Entity Name: Inscription
