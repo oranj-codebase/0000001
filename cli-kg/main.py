@@ -31,31 +31,65 @@ technologies = {
     5: "Recursive reinscription",
 }
 
-# Function to list projects
 def list_projects():
     print("Choose a project:")
     for i, project in projects:
         print(f"{i}. {project}")
 
-# Main CLI Interaction
-def main():
-    answer = input("Do you want to know the Ordinal Players? (Yes/No): ").strip().lower()
-    if answer == "yes":
-        list_projects()
-        project_choice = int(input("Select a project by number: "))
-        choice = input("Choose founder or technology: ").strip().lower()
-        if choice == "founder":
+def choose_project():
+    list_projects()
+    while True:
+        project_choice = input("Select a project by number (or 'B' to go back, 'Exit' to exit): ").strip().lower()
+        if project_choice.lower() in ['b', 'back']:
+            return None
+        if project_choice.lower() == 'exit':
+            return 'exit'
+        try:
+            project_choice = int(project_choice)
+            if project_choice in range(1, len(projects) + 1):
+                return project_choice
+        except ValueError:
+            pass
+        print("Invalid choice. Try again.")
+
+def choose_option(project_choice):
+    while True:
+        choice = input("Choose founder or technology (or 'B' to go back, 'Exit' to exit): ").strip().lower()
+        if choice in ['b', 'back']:
+            return None
+        if choice == 'exit':
+            return 'exit'
+        if choice in ["founder", "f"]:
             for rel in relationships:
                 if rel[1] == project_choice:
                     print(f"Founder: {founders[rel[0]]}")
-        elif choice == "technology":
+            return
+        elif choice in ["technology", "t"]:
             print(f"Technology: {technologies[project_choice]}")
+            return
         else:
-            print("Invalid choice.")
-    elif answer == "no":
-        print("Few understand, you are the many.")
-    else:
-        print("Invalid response. Please answer with 'Yes' or 'No'.")
+            print("Invalid choice. Try again.")
+
+def main():
+    while True:
+        answer = input("Do you want to know the Ordinal Players? (Yes/No/Back/Exit): ").strip().lower()
+        if answer in ["yes", "y"]:
+            project_choice = choose_project()
+            if project_choice == 'exit':
+                return
+            if project_choice is not None:
+                option_choice = choose_option(project_choice)
+                if option_choice == 'exit':
+                    return
+        elif answer in ["no", "n"]:
+            print("Few understand, you are the many.")
+            break
+        elif answer in ['b', 'back']:
+            continue
+        elif answer == 'exit':
+            break
+        else:
+            print("Invalid response. Try again.")
 
 if __name__ == "__main__":
     main()

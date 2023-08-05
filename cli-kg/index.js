@@ -44,35 +44,62 @@ function listProjects() {
   });
 }
 
+
 function main() {
-  rl.question("Do you want to know the Ordinal Players? (Yes/No): ", answer => {
-    if (answer.toLowerCase() === 'yes') {
-      listProjects();
-      rl.question("Select a project by number: ", projectChoice => {
-        rl.question("Choose founder or technology: ", choice => {
+    rl.question("Do you want to know the Ordinal Players? (Yes/No/Back/Exit): ", answer => {
+      if (["yes", "y"].includes(answer.toLowerCase())) {
+        listProjects();
+        rl.question("Select a project by number (or 'B' to go back, 'Exit' to exit): ", projectChoice => {
+          if (["b", "back"].includes(projectChoice.toLowerCase())) {
+            main();
+            return;
+          }
+          if (projectChoice.toLowerCase() === 'exit') {
+            rl.close();
+            return;
+          }
           const projectId = parseInt(projectChoice);
-          if (choice.toLowerCase() === 'founder') {
-            relationships.forEach(rel => {
-              if (rel.projectId === projectId) {
-                console.log(`Founder: ${founders[rel.founderId]}`);
+          const askChoice = () => {
+            rl.question("Choose founder or technology (or 'B' to go back, 'Exit' to exit): ", choice => {
+              if (["b", "back"].includes(choice.toLowerCase())) {
+                main();
+                return;
+              }
+              if (choice.toLowerCase() === 'exit') {
+                rl.close();
+                return;
+              }
+              if (["founder", "f"].includes(choice.toLowerCase())) {
+                relationships.forEach(rel => {
+                  if (rel.projectId === projectId) {
+                    console.log(`Founder: ${founders[rel.founderId]}`);
+                  }
+                });
+                rl.close();
+              } else if (["technology", "t"].includes(choice.toLowerCase())) {
+                console.log(`Technology: ${technologies[projectId]}`);
+                rl.close();
+              } else {
+                console.log("Invalid choice. Try again.");
+                askChoice();
               }
             });
-          } else if (choice.toLowerCase() === 'technology') {
-            console.log(`Technology: ${technologies[projectId]}`);
-          } else {
-            console.log("Invalid choice.");
-          }
-          rl.close();
+          };
+          askChoice();
         });
-      });
-    } else if (answer.toLowerCase() === 'no') {
-      console.log("Few understand, you are the many.");
-      rl.close();
-    } else {
-      console.log("Invalid response. Please answer with 'Yes' or 'No'.");
-      rl.close();
-    }
-  });
-}
-
-main();
+      } else if (["no", "n"].includes(answer.toLowerCase())) {
+        console.log("Few understand, you are the many.");
+        rl.close();
+      } else if (["b", "back"].includes(answer.toLowerCase())) {
+        main();
+      } else if (answer.toLowerCase() === 'exit') {
+        rl.close();
+      } else {
+        console.log("Invalid response. Try again.");
+        main();
+      }
+    });
+  }
+  
+  main();
+  
