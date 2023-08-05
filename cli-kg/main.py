@@ -1,4 +1,3 @@
-# Table Definitions
 projects = [
     (1, "Ordinautz"),
     (2, "MetaBRC"),
@@ -31,6 +30,7 @@ technologies = {
     5: "Recursive reinscription",
 }
 
+
 def list_projects():
     print("Choose a project:")
     for i, project in projects:
@@ -42,7 +42,7 @@ def choose_project():
         project_choice = input("Select a project by number (or 'B' to go back, 'Exit' to exit): ").strip().lower()
         if project_choice.lower() in ['b', 'back']:
             return None
-        if project_choice.lower() == 'exit':
+        if project_choice.lower() in ['exit', 'e']:
             return 'exit'
         try:
             project_choice = int(project_choice)
@@ -57,7 +57,7 @@ def choose_option(project_choice):
         choice = input("Choose founder or technology (or 'B' to go back, 'Exit' to exit): ").strip().lower()
         if choice in ['b', 'back']:
             return None
-        if choice == 'exit':
+        if choice in ['exit', 'e']:
             return 'exit'
         if choice in ["founder", "f"]:
             for rel in relationships:
@@ -73,21 +73,21 @@ def choose_option(project_choice):
 def main():
     while True:
         answer = input("Do you want to know the Ordinal Players? (Yes/No/Back/Exit): ").strip().lower()
+        if answer in ["exit", "e"]:
+            break
         if answer in ["yes", "y"]:
             project_choice = choose_project()
-            if project_choice == 'exit':
+            if project_choice in ['exit', 'e']:
                 return
             if project_choice is not None:
                 option_choice = choose_option(project_choice)
-                if option_choice == 'exit':
+                if option_choice in ['exit', 'e']:
                     return
         elif answer in ["no", "n"]:
             print("Few understand, you are the many.")
             break
         elif answer in ['b', 'back']:
             continue
-        elif answer == 'exit':
-            break
         else:
             print("Invalid response. Try again.")
 
