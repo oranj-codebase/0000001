@@ -1,79 +1,78 @@
-const inquirer = require('inquirer');
-const neo4j = require('neo4j-driver');
+const readline = require('readline');
 
-const url = 'bolt://your-neo4j-host:port'; // e.g., 'bolt://localhost:7687' or 'neo4j://example.com:7687'
-const username = 'your-username'; // e.g., 'neo4j'
-const password = 'your-password'; // e.g., 'secret'
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-const driver = neo4j.driver(url, neo4j.auth.basic(username, password));
+const projects = [
+  { id: 1, name: "Ordinautz" },
+  { id: 2, name: "MetaBRC" },
+  { id: 3, name: "Bitcoin Frogs" },
+  { id: 4, name: "Onchain Maxi Biz" },
+  { id: 5, name: "Onchain Monkeys" },
+];
 
-function askAboutOrdinalTheory() {
-  inquirer.prompt([
-    {
-      type: 'confirm',
-      name: 'learn',
-      message: 'Do you want to learn about the ordinal theory?',
-    },
-  ]).then((answers) => {
-    if (answers.learn) {
-      chooseProject();
-    } else {
-      console.log('Few understand, you are the many');
-    }
+const relationships = [
+  { founderId: 6, projectId: 1 },
+  { founderId: 7, projectId: 2 },
+  { founderId: 8, projectId: 3 },
+  { founderId: 9, projectId: 4 },
+  { founderId: 10, projectId: 5 },
+];
+
+const founders = {
+  6: "Hantoshi",
+  7: "Good",
+  8: "Frogtoshi",
+  9: "ZKShark",
+  10: "Danny",
+};
+
+const technologies = {
+  1: "Recursive Inscription",
+  2: "Recursive Inscription",
+  3: "Inscription",
+  4: "Inscription",
+  5: "Recursive reinscription",
+};
+
+function listProjects() {
+  console.log("Choose a project:");
+  projects.forEach(project => {
+    console.log(`${project.id}. ${project.name}`);
   });
 }
 
-function chooseProject() {
-  // Query the list of projects from the graph database
-  const session = driver.session();
-  session.run('MATCH (p:Project) RETURN p.name AS name')
-    .then((result) => {
-      const projects = result.records.map((record) => record.get('name'));
-      inquirer.prompt([
-        {
-          type: 'list',
-          name: 'project',
-          message: 'Choose a project:',
-          choices: projects,
-        },
-      ]).then((answers) => {
-        chooseFounderOrTechnology(answers.project);
+function main() {
+  rl.question("Do you want to know the Ordinal Players? (Yes/No): ", answer => {
+    if (answer.toLowerCase() === 'yes') {
+      listProjects();
+      rl.question("Select a project by number: ", projectChoice => {
+        rl.question("Choose founder or technology: ", choice => {
+          const projectId = parseInt(projectChoice);
+          if (choice.toLowerCase() === 'founder') {
+            relationships.forEach(rel => {
+              if (rel.projectId === projectId) {
+                console.log(`Founder: ${founders[rel.founderId]}`);
+              }
+            });
+          } else if (choice.toLowerCase() === 'technology') {
+            console.log(`Technology: ${technologies[projectId]}`);
+          } else {
+            console.log("Invalid choice.");
+          }
+          rl.close();
+        });
       });
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-    .finally(() => {
-      session.close();
-    });
-}
-
-function chooseFounderOrTechnology(project) {
-  inquirer.prompt([
-    {
-      type: 'list',
-      name: 'choice',
-      message: 'Choose between the founder and the technology:',
-      choices: ['Founder', 'Technology'],
-    },
-  ]).then((answers) => {
-    if (answers.choice === 'Founder') {
-      showFounderDetails(project);
+    } else if (answer.toLowerCase() === 'no') {
+      console.log("Few understand, you are the many.");
+      rl.close();
     } else {
-      showTechnologyDetails(project);
+      console.log("Invalid response. Please answer with 'Yes' or 'No'.");
+      rl.close();
     }
   });
 }
 
-function showFounderDetails(project) {
-  // Query the founder details from the graph database
-  // ...
-}
-
-function showTechnologyDetails(project) {
-  // Query the technology details from the graph database
-  // ...
-}
-
-// Start the CLI
-askAboutOrdinalTheory();
+main();
