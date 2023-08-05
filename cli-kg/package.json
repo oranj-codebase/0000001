@@ -1,0 +1,29 @@
+{
+  "name": "cli-kg",
+  "version": "0.0.1",
+  "description": "CLI tool for Ordinautz' KG.",
+  "main": "index.js",
+  "scripts": {
+    "test": "w.kg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kluless13/ordinautz.git"
+  },
+  "keywords": [
+    "knowledge",
+    "graph",
+    "CLI",
+    "Ordinautz"
+  ],
+  "author": "kluless",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kluless13/ordinautz/issues"
+  },
+  "homepage": "https://github.com/kluless13/ordinautz#readme",
+  "dependencies": {
+    "inquirer": "^8.2.6",
+    "neo4j-driver": "^5.11.0"
+  }
+}
