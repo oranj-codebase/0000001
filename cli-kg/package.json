@@ -4,8 +4,9 @@
   "description": "CLI tool for Ordinautz' KG.",
   "main": "index.js",
   "scripts": {
-    "test": "w.kg"
-  },
+    "test": "node index.js"
+  }
+  ,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kluless13/ordinautz.git"
