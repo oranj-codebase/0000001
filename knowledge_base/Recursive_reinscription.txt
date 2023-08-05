@@ -1,3 +1,0 @@
-Entity ID: 13
-Entity Type: Technology
-Entity Name: Recursive reinscription

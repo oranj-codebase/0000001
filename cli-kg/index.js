@@ -34,7 +34,7 @@ const technologies = {
   2: "Recursive Inscription",
   3: "Inscription",
   4: "Inscription",
-  5: "Recursive reinscription",
+  5: "Reinscription",
 };
 
 function listProjects() {
