@@ -62,13 +62,26 @@ def choose_option(project_choice):
         if choice in ["founder", "f"]:
             for rel in relationships:
                 if rel[1] == project_choice:
+                    founder_name = founders[rel[0]]
                     print(f"Founder: {founders[rel[0]]}")
+                    print(get_details(founder_name))
             return
         elif choice in ["technology", "t"]:
             print(f"Technology: {technologies[project_choice]}")
+            print(f"Technology: {technologies[project_choice]}")
+            print(get_details(technologies[project_choice]))
             return
         else:
             print("Invalid choice. Try again.")
+
+def get_details(filename):
+    path = '/Users/angad/Desktop/ordinautz/knowledge_base'
+    try:
+        with open(path, 'r') as file:
+            details = file.read()
+        return details
+    except FileNotFoundError:
+        return f"Details for {filename} not found."
 
 def main():
     while True:
