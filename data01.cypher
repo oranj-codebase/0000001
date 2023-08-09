@@ -4,7 +4,7 @@ MERGE (:Central {name: 'Ordinal theory'});
 MERGE (:Project {entity_id: 1, name: 'Ordinautz'});
 MERGE (:Project {entity_id: 2, name: 'MetaBRC'});
 MERGE (:Project {entity_id: 3, name: 'Bitcoin Frogs'});
-MERGE (:Project {entity_id: 4, name: 'Onchain Maxi Biz'});
+MERGE (:Project {entity_id: 4, name: 'Ordinal Maxi Biz'});
 MERGE (:Project {entity_id: 5, name: 'Onchain Monkeys'});
 MERGE (:Team {entity_id: 6, name: 'Hantoshi'});
 MERGE (:Team {entity_id: 7, name: 'Good'});
