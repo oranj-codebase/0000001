@@ -1,0 +1,17 @@
+{
+  "name": "ordinautz",
+  "version": "1.0.0",
+  "description": "A repository for updates on all things related to Ordinautz.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [],
+  "author": "kluless",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@clack/prompts": "^0.6.3",
+    "chalk": "^5.3.0"
+  }
+}
