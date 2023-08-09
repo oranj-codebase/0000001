@@ -51,15 +51,37 @@ async function main() {
         1 // correct answer index
     );
 
+    const question3 = new Question(
+        "Who is the founder of Bitcoin Frogs?",
+        ["Hantoshi", "Good", "Frogtoshi", "ZKShark", "Danny"],
+        2 // correct answer index
+    );
+
+    const question4 = new Question(
+        "Who is the founder of Ordinal Maxi Biz?",
+        ["Hantoshi", "Good", "Frogtoshi", "ZKShark", "Danny"],
+        3 // correct answer index
+    );
+
+    const question5 = new Question(
+        "Who is the founder of Onchain Monkeys?",
+        ["Hantoshi", "Good", "Frogtoshi", "ZKShark", "Danny"],
+        4 // correct answer index
+    );
+
     await askQuestion(question1.question, question1.answersArray, question1.correctAnswerIndex);
     await askQuestion(question2.question, question2.answersArray, question2.correctAnswerIndex);
-
+    await askQuestion(question3.question, question3.answersArray, question3.correctAnswerIndex);
+    await askQuestion(question4.question, question4.answersArray, question4.correctAnswerIndex);
+    await askQuestion(question5.question, question5.answersArray, question5.correctAnswerIndex);
+    
+    
     console.log(`You got ${totalCorrect} correct!`);
 
-    if (totalCorrect == 10) {
+    if (totalCorrect == 5) {
         console.log(chalk.green("You are now an Ordinaut! Congratulations!"));
     } else {
-        console.log(chalk.red("You need to score 10/10 to venture into space with us."));
+        console.log(chalk.red("You need to score 5/5 to venture into space with us."));
     }
 
     console.log(chalk.bgBlack(chalk.yellow('Thanks for playing!')));
