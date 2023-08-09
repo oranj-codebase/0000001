@@ -42,10 +42,17 @@ async function main() {
     const question1 = new Question(
         "What is the name of the Ordinautz founder?",
         ["Hantoshi", "Good", "Frogtoshi", "ZKShark", "Danny"],
-        0
+        0 // correct answer index
+    );
+
+    const question2 = new Question(
+        "Who is the founder of MetaBRC?",
+        ["Hantoshi", "Good", "Frogtoshi", "ZKShark", "Danny"],
+        1 // correct answer index
     );
 
     await askQuestion(question1.question, question1.answersArray, question1.correctAnswerIndex);
+    await askQuestion(question2.question, question2.answersArray, question2.correctAnswerIndex);
 
     console.log(`You got ${totalCorrect} correct!`);
 
