@@ -11,7 +11,7 @@ const projects = [
   { id: 1, name: "Ordinautz" },
   { id: 2, name: "MetaBRC" },
   { id: 3, name: "Bitcoin Frogs" },
-  { id: 4, name: "Onchain Maxi Biz" },
+  { id: 4, name: "Ordinal Maxi Biz" },
   { id: 5, name: "Onchain Monkeys" },
 ];
 
