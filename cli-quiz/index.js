@@ -1,8 +1,23 @@
 import * as p from '@clack/prompts';
 import { setTimeout } from 'node:timers/promises';
 import chalk from 'chalk';
+import { exec } from 'child_process';
 
-
+function displayOrdinautzBanner(callback) {
+    exec('python3 ordinautz.py', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        // Split the stdout into lines
+        const lines = stdout.split('\n');
+        // Print all lines in yellow
+        lines.forEach(line => {
+            console.log(chalk.yellow(line));
+        });
+        callback();
+    });
+  }
 
 let totalCorrect = 0;
 
@@ -87,4 +102,4 @@ async function main() {
     console.log(chalk.bgBlack(chalk.yellow('Thanks for playing!')));
 }
 
-main();
+displayOrdinautzBanner(main);

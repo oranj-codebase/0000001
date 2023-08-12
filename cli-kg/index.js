@@ -1,7 +1,9 @@
-const fs = require('fs');
-const readline = require('readline');
-const sleep = require('sleep-promise');
-const { exec } = require('child_process');
+import fs from 'fs';
+import readline from 'readline';
+import sleep from 'sleep-promise';
+import { exec } from 'child_process';
+import chalk from 'chalk';
+
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -41,16 +43,24 @@ const technologies = {
 };
 
 
+
 function displayOrdinautzBanner(callback) {
   exec('python3 ordinautz.py', (error, stdout, stderr) => {
       if (error) {
           console.error(`exec error: ${error}`);
           return;
       }
-      console.log(stdout);
+      // Split the stdout into lines
+      const lines = stdout.split('\n');
+      // Print all lines in yellow
+      lines.forEach(line => {
+          console.log(chalk.yellow(line));
+      });
       callback();
   });
 }
+
+
 
 function listProjects() {
   console.log("Choose a project:");
@@ -132,4 +142,3 @@ function main() {
 }
 
 displayOrdinautzBanner(main);
-

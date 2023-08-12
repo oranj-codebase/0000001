@@ -18,6 +18,7 @@
   ],
   "author": "kluless",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/kluless13/ordinautz/issues"
   },
