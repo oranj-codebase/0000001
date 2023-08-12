@@ -1,8 +1,11 @@
 {
-  "name": "ordinautz",
+  "name": "cli-quiz",
   "version": "1.0.0",
   "description": "A repository for updates on all things related to Ordinautz.",
   "main": "index.js",
+  "bin": {
+    "cli-quiz": "./index.js"
+  },
   "scripts": {
     "test": "node index.js"
   },
