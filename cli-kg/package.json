@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node index.js"
-  }
-  ,
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kluless13/ordinautz.git"
@@ -24,7 +23,10 @@
   },
   "homepage": "https://github.com/kluless13/ordinautz#readme",
   "dependencies": {
+    "chalk": "^5.3.0",
+    "figlet": "^1.6.0",
     "inquirer": "^8.2.6",
-    "neo4j-driver": "^5.11.0"
+    "neo4j-driver": "^5.11.0",
+    "sleep-promise": "^9.1.0"
   }
 }

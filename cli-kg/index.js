@@ -1,6 +1,7 @@
 const fs = require('fs');
-
 const readline = require('readline');
+const sleep = require('sleep-promise');
+const { exec } = require('child_process');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -39,6 +40,18 @@ const technologies = {
   5: "Reinscription",
 };
 
+
+function displayOrdinautzBanner(callback) {
+  exec('python3 ordinautz.py', (error, stdout, stderr) => {
+      if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+      }
+      console.log(stdout);
+      callback();
+  });
+}
+
 function listProjects() {
   console.log("Choose a project:");
   projects.forEach(project => {
@@ -47,7 +60,7 @@ function listProjects() {
 }
 
 function getDetails(filename) {
-    const path = `/Users/angad/Desktop/ordinautz/knowledge_base${filename}.txt`;
+    const path = `/Users/angad/Desktop/ordinautz/knowledge_base/${filename}.txt`;
     try {
       const details = fs.readFileSync(path, 'utf8');
       return details;
@@ -117,7 +130,6 @@ function main() {
       }
     });
 }
-rl.close();
-return;
 
-main();
+displayOrdinautzBanner(main);
+
