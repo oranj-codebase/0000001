@@ -1,9 +1,7 @@
 import fs from 'fs';
 import readline from 'readline';
-import sleep from 'sleep-promise';
 import { exec } from 'child_process';
 import chalk from 'chalk';
-
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -42,25 +40,19 @@ const technologies = {
   5: "Reinscription",
 };
 
-
-
 function displayOrdinautzBanner(callback) {
   exec('python3 ordinautz.py', (error, stdout, stderr) => {
       if (error) {
           console.error(`exec error: ${error}`);
           return;
       }
-      // Split the stdout into lines
       const lines = stdout.split('\n');
-      // Print all lines in yellow
       lines.forEach(line => {
           console.log(chalk.yellow(line));
       });
       callback();
   });
 }
-
-
 
 function listProjects() {
   console.log("Choose a project:");
@@ -80,65 +72,74 @@ function getDetails(filename) {
 }
 
 function main() {
-    rl.question("Do you want to know the Ordinal Players? (Yes/No/Back/Exit): ", answer => {
+  rl.question("Do you want to know the Ordinal Players? (Yes/No/Back/Exit): ", answer => {
       if (answer.toLowerCase() === 'exit' || answer.toLowerCase() === 'e') {
-        rl.close();
-        return;
+          rl.close();
+          return;
       }
       if (["yes", "y"].includes(answer.toLowerCase())) {
-        listProjects();
-        rl.question("Select a project by number (or 'B' to go back, 'Exit' to exit): ", projectChoice => {
-          if (["b", "back"].includes(projectChoice.toLowerCase())) {
-            main();
-            return;
-          }
-          if (projectChoice.toLowerCase() === 'exit' || projectChoice.toLowerCase() === 'e') {
-            rl.close();
-            return;
-          }
-          const projectId = parseInt(projectChoice);
-          const askChoice = () => {
-            rl.question("Choose founder or technology (or 'B' to go back, 'Exit' to exit): ", choice => {
-              if (["b", "back"].includes(choice.toLowerCase())) {
-                main();
-                return;
+          listProjects();
+          rl.question("Select a project by number (or 'B' to go back, 'Exit' to exit): ", async projectChoice => {
+              if (["b", "back"].includes(projectChoice.toLowerCase())) {
+                  main();
+                  return;
               }
-              if (choice.toLowerCase() === 'exit' || choice.toLowerCase() === 'e') {
-                rl.close();
-                return;
+              if (projectChoice.toLowerCase() === 'exit' || projectChoice.toLowerCase() === 'e') {
+                  rl.close();
+                  return;
               }
-              if (["founder", "f"].includes(choice.toLowerCase())) {
-                relationships.forEach(rel => {
-                  if (rel.projectId === projectId) {
-                    const founderName = founders[rel.founderId];
-                    console.log(`Founder: ${founderName}`);
-                    console.log(getDetails(founderName.replace(' ', '_'))); // Call the getDetails function here
-                  }
-                });
-                rl.close();
-              } else if (["technology", "t"].includes(choice.toLowerCase())) {
-                const technologyName = technologies[projectId];
-                console.log(`Technology: ${technologyName}`);
-                console.log(getDetails(technologyName.replace(' ', '_'))); // Call the getDetails function here
-                rl.close();
+              const projectId = parseInt(projectChoice);
+              const selectedProject = projects.find(p => p.id === projectId);
+              if (selectedProject) {
+                  console.log(await getDetails(selectedProject.name.replace(' ', '_')));
               } else {
-                console.log("Invalid choice. Try again.");
-                askChoice();
+                  console.log("Invalid project number. Try again.");
+                  main();
+                  return;
               }
-            });
-          };
-          askChoice();
-        });
+
+              const askChoice = () => {
+                  rl.question("Choose founder or technology (or 'B' to go back, 'Exit' to exit): ", choice => {
+                      if (["b", "back"].includes(choice.toLowerCase())) {
+                          main();
+                          return;
+                      }
+                      if (choice.toLowerCase() === 'exit' || choice.toLowerCase() === 'e') {
+                          rl.close();
+                          return;
+                      }
+                      if (["founder", "f"].includes(choice.toLowerCase())) {
+                          relationships.forEach(rel => {
+                              if (rel.projectId === projectId) {
+                                  const founderName = founders[rel.founderId];
+                                  console.log(`Founder: ${founderName}`);
+                                  console.log(getDetails(founderName.replace(' ', '_')));
+                              }
+                          });
+                          rl.close();
+                      } else if (["technology", "t"].includes(choice.toLowerCase())) {
+                          const technologyName = technologies[projectId];
+                          console.log(`Technology: ${technologyName}`);
+                          console.log(getDetails(technologyName.replace(' ', '_')));
+                          rl.close();
+                      } else {
+                          console.log("Invalid choice. Try again.");
+                          askChoice();
+                      }
+                  });
+              };
+              askChoice();
+          });
       } else if (["no", "n"].includes(answer.toLowerCase())) {
-        console.log("Few understand, you are the many.");
-        rl.close();
+          console.log("Few understand, you are the many.");
+          rl.close();
       } else if (["b", "back"].includes(answer.toLowerCase())) {
-        main();
+          main();
       } else {
-        console.log("Invalid response. Try again.");
-        main();
+          console.log("Invalid response. Try again.");
+          main();
       }
-    });
+  });
 }
 
 displayOrdinautzBanner(main);

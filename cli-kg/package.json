@@ -28,6 +28,7 @@
     "figlet": "^1.6.0",
     "inquirer": "^8.2.6",
     "neo4j-driver": "^5.11.0",
-    "sleep-promise": "^9.1.0"
+    "sleep-promise": "^9.1.0",
+    "terminal-image": "^2.0.0"
   }
 }
