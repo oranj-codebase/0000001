@@ -1,6 +1,10 @@
+#!/usr/bin/env node
+
+
 import * as p from '@clack/prompts';
 import { setTimeout } from 'node:timers/promises';
 import chalk from 'chalk';
+import chalkAnimation from 'chalk-animation';
 import { exec } from 'child_process';
 
 function displayOrdinautzBanner(callback) {
@@ -52,7 +56,7 @@ class Question {
 }
 
 async function main() {
-    console.log(chalk.bgBlack(chalk.yellow('Welcome to the Ordinautz Quiz!\n')));
+    console.log(chalk.bgBlack(chalk.redBright('Welcome to the Ordinautz Quiz!\n')));
 
     const question1 = new Question(
         "How do you inscribe metadata onto a satoshi?",
@@ -67,7 +71,7 @@ async function main() {
     );
 
     const question3 = new Question(
-        "What did the OCM team create than enables easy storage of large files on chain?",
+        "What did the OCM team create that enables easy storage of large files on chain?",
         ["Recursive Inscription","Recursive Injection","Repurposed Inscription","Receive Transmission"],
         0 // correct answer index
     );
@@ -129,12 +133,13 @@ async function main() {
     console.log(`You got ${totalCorrect} correct!`);
 
     if (totalCorrect == 10) {
-        console.log(chalk.green("Incoming message: You are invited to join the Ordinautz on their mission. This is your password for confirmation: 'Ws are all I collect.'"));
+        console.log(chalk.bgGreenBright(chalk.black("Incoming message: You are invited to join the Ordinautz on their mission. This is your password for confirmation: 'Ws are all I collect.'")));
     } else {
-        console.log(chalk.red("You need to score 10/10 to venture into space with us."));
+        console.log(chalk.bgRed("You need to score 10/10 to venture into space with us."));
     }
-
     console.log(chalk.bgBlack(chalk.yellow('Thanks for playing!')));
 }
 
-displayOrdinautzBanner(main);
+if (import.meta.url === `file://${process.argv[1]}`) {
+    displayOrdinautzBanner(main);
+}
