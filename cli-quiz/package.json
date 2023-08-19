@@ -1,14 +1,12 @@
 {
-  "name": "ordinautz-cli-quiz",
-  "version": "1.0.0",
+  "name": "ordinautz-quiz",
+  "version": "1.1.1",
   "description": "A repository for updates on all things related to Ordinautz.",
   "main": "index.js",
-  "bin": {
-    "ordinautz-cli-quiz": "  ./index.js"
-  },
   "scripts": {
-    "test": "node index.js"
+    "start": "node ./index.js"
   },
+  "bin": "./index.js",
   "keywords": [],
   "author": "kluless",
   "license": "ISC",
