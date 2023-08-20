@@ -20,6 +20,8 @@ _16/08/2023_ - CLI WL tool a.k.a `cli-quiz` ready to deploy.
             If the process is smooth, seamless and without any friciton, it shall be published as an `npx` package.
 
 _20/08/2023_ - Version 0.02 of Knowledge Graoh structure - updated errors.
+                Beta version of CLI Quiz tool now available, you can run it in your terminal with `npx ordiquiz`.
+                Come share the secret message!
             
 Decentralised Knowledge Graph:
 
