@@ -18,6 +18,8 @@ _15/08/2023_ - CLI WL tool being built; will be published this week.
 _16/08/2023_ - CLI WL tool a.k.a `cli-quiz` ready to deploy.
             Tests will be conducted with a small cohort of 6-8 community members.
             If the process is smooth, seamless and without any friciton, it shall be published as an `npx` package.
+
+_20/08/2023_ - Version 0.02 of Knowledge Graoh structure - updated errors.
             
 Decentralised Knowledge Graph:
 
