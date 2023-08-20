@@ -13,24 +13,23 @@ MERGE (:Team {entity_id: 9, name: 'ZKShark'});
 MERGE (:Team {entity_id: 10, name: 'Danny'});
 MERGE (:Technology {entity_id: 11, name: 'Recursive Inscription'});
 MERGE (:Technology {entity_id: 12, name: 'Inscription'});
-MERGE (:Technology {entity_id: 13, name: 'Recursive Reinscription'});
 
 // Relationships table:
 
 MATCH (a:Team {entity_id: 6}), (b:Project {entity_id: 1})
-CREATE (a)-[:WORKS_ON]->(b);
+CREATE (a)-[:FOUNDER_OF]->(b);
 
 MATCH (a:Team {entity_id: 7}), (b:Project {entity_id: 2})
-CREATE (a)-[:WORKS_ON]->(b);
+CREATE (a)-[:FOUNDER_OF]->(b);
 
 MATCH (a:Team {entity_id: 8}), (b:Project {entity_id: 3})
-CREATE (a)-[:WORKS_ON]->(b);
+CREATE (a)-[:FOUNDER_OF]->(b);
 
 MATCH (a:Team {entity_id: 9}), (b:Project {entity_id: 4})
-CREATE (a)-[:WORKS_ON]->(b);
+CREATE (a)-[:FOUNDER_OF]->(b);
 
 MATCH (a:Team {entity_id: 10}), (b:Project {entity_id: 5})
-CREATE (a)-[:WORKS_ON]->(b);
+CREATE (a)-[:FOUNDER_OF]->(b);
 
 MATCH (a:Project {entity_id: 1}), (b:Technology {entity_id: 11})
 CREATE (a)-[:USES]->(b);
@@ -44,7 +43,7 @@ CREATE (a)-[:USES]->(b);
 MATCH (a:Project {entity_id: 4}), (b:Technology {entity_id: 12})
 CREATE (a)-[:USES]->(b);
 
-MATCH (a:Project {entity_id: 5}), (b:Technology {entity_id: 13})
+MATCH (a:Project {entity_id: 5}), (b:Technology {entity_id: 11})
 CREATE (a)-[:USES]->(b);
 
 
@@ -53,14 +52,14 @@ CREATE (a)-[:USES]->(b);
 MATCH (a:Central {name: 'Ordinal theory'})
 WITH a
 MATCH (b:Project)
-CREATE (a)-[:CONTAINS]->(b);
+CREATE (a)-[:INCLUDES]->(b);
 
 MATCH (a:Central {name: 'Ordinal theory'})
 WITH a
 MATCH (b:Team)
-CREATE (a)-[:CONTAINS]->(b);
+CREATE (a)-[:INCLUDES]->(b);
 
 MATCH (a:Central {name: 'Ordinal theory'})
 WITH a
 MATCH (b:Technology)
-CREATE (a)-[:CONTAINS]->(b);
+CREATE (a)-[:INCLUDES]->(b);
